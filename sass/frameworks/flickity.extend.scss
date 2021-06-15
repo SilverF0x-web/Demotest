@@ -1,0 +1,258 @@
+@import "mixin/base_setting";
+.flickity-enabled {
+	position: relative;
+}
+.flickity-enabled:focus { outline: none; }
+
+.flickity-viewport {
+	overflow: hidden;
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.flickity-slider {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	will-change:transform;
+}
+
+.flickity-enabled.is-draggable {
+	-webkit-tap-highlight-color: transparent;
+	tap-highlight-color: transparent;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+.flickity-prev-next-button {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 20px;
+	height: 34px;
+	line-height: 1;
+	color: #000;
+	border: none;
+	cursor: pointer;
+	background: none;
+	margin-top: -10px;
+	z-index: 150;
+	font-size: 35px;
+	text-align: center;
+	&:after{
+		@extend %fontello;
+	}
+	&.next { 
+		right: 0;
+		left: auto;
+		&:after{
+			content: '\E804';
+		} 
+	}
+}
+
+
+
+.flickity-prev-next-button:active {
+	opacity: 0.6;
+}
+
+.flickity-prev-next-button.previous { 
+	&:after{
+		content: '\E803';
+	} 
+}
+.flickity-prev-next-button:disabled {
+	opacity: 0.3;
+	cursor: auto;
+}
+
+.flickity-prev-next-button svg {
+	display: none;
+}
+
+.flickity-prev-next-button .arrow {
+	fill: #54b151;
+}
+
+%flickDots{
+  line-height: 0;
+  li{
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 10px 0 0;
+    width: 12px;
+    height: 12px;
+    @include border-radius(14px);
+    background: #fff;
+    border: 2px solid #bb180a;
+    &.is-selected{
+      background: #bb180a;
+    }
+  }
+}
+%flickDotsBlue{
+  line-height: 0;
+  text-align: center;
+  position: relative;
+  &:before{
+    content: '\0020';
+    height: 1px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 100%;
+    z-index: 10;
+    background: #e6e6e6;
+  }
+  li{
+    z-index: 15;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 5px 0 5px;
+    width: 10px;
+    height: 10px;
+    @include border-radius(10px);
+    background: #dfdfdf;
+    box-shadow: -5px 0px 0px #fff, 5px 0px 0px #fff;
+    &.is-selected{
+      background: #9beff3;
+    }
+  }
+}
+
+.flickity-page-dots {
+	padding: 0;
+    margin: 0;
+    list-style: none;
+	li{
+      @include transition(all 0.35s ease);
+      cursor: pointer;
+	}
+}
+.flickity-page-dots .dot.is-selected {
+	opacity: 1;
+}
+
+.flick-article{
+  margin: 0 -12px;
+  .flickity-page-dots{
+    display: none;
+    padding: 30px 12px 0 12px;
+    @extend %flickDots;
+  }
+}
+.flick-article-item{
+  width: 33.333%;
+  padding: 0 12px;
+  > *{
+    min-height: 100%;
+  }
+}
+
+.flick-promo-img{
+  line-height: 0;
+  overflow: hidden;
+  @media screen and (min-width: 1025px){
+    @include border-radius(5px);
+  }
+  position: relative;
+  background: #000;
+  img{
+    @include opacity(0.8);
+    width: 100%;
+    height: 100%;
+  }
+}
+.flick-promo-item{
+  width: 100%;
+  max-width: 1098px;
+  color: #fff;
+  display: block;
+  text-decoration: none;
+  padding: 0 14px;
+}
+.flick-promo-content{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 65px;
+  width: 100%;
+}
+.flick-promo{
+  overflow: hidden;
+  margin-bottom: 30px;
+  .flickity-prev-next-button{
+    width: 56px;
+    height: 56px;
+    top: 0;
+    background: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+    @include border-radius(55px);
+  }
+  .flickity-page-dots{
+    @extend %flickDotsBlue;
+    padding-top: 15px;
+  }
+  .flickity-nav{
+    position: absolute;
+    width: 100%;
+    max-width: 1150px;
+    left: 0;
+    right: 0;
+    height: 0;
+    top: 50%;
+    margin: -28px auto 0 auto;
+    overflow: visible;
+    @media screen and (min-width: 1025px){
+      margin-top: 0 !important;
+    }
+  }
+}
+@media screen and (max-width: 1150px){
+  .flick-promo{
+    .flickity-nav{
+      width: 85%;
+    }
+  }
+}
+@media screen and (max-width: 1025px){
+  .section-main{
+    .flick-promo {
+      margin-top: -35px;
+    }
+  }
+  .flick-promo{
+    .flickity-nav{
+      width: 100%;
+      top: 0;
+      .flickity-prev-next-button{
+        top: -18px;
+        left: -28px;
+        font-size: 28px;
+        text-align: right;
+        &.next{
+          left: auto;
+          text-align: left;
+          right: -28px;
+        }
+      }
+    }
+  }
+  .flick-promo-item{
+    color: #000;
+    padding: 0;
+  }
+  .flick-promo-content{
+    position: static;
+    padding: 22px;
+    text-align: center;
+  }
+}

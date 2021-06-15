@@ -1,0 +1,213 @@
+@import "css3";
+%clearfix {
+  &:before, &:after {
+    content: "\0020";
+    display: table;
+    clear: both;
+  }
+}
+%shrink-null{
+  @include flex-shrink(0);
+}
+%childMarginClear{
+  *{
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+%cover {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+%contain {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+%boxStyle{
+  @include border-radius(3px);
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px 0 #d5e0e8;
+}
+%touchscroll{
+  -webkit-overflow-scrolling: touch;
+}
+%scrollbar-blue{
+  &::-webkit-scrollbar{width:3px;height:2px}
+  &::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:#A5DEFF }
+  &::-webkit-scrollbar-thumb{background:#149efc;}
+  &::-webkit-scrollbar-thumb:hover{background:#149efc}
+  &::-webkit-scrollbar-button,::-webkit-scrollbar-corner,::-webkit-resizer{display: none;}
+}
+%ellipsis {
+  white-space: nowrap;
+  text-overflow:ellipsis;
+  overflow: hidden;
+}
+%scroll{
+  -webkit-overflow-scrolling: touch;
+}
+%arrow{
+  border: solid transparent;
+  content: "\0020";
+  height: 0;
+  width: 0;
+  pointer-events: none;
+  border-color: rgba(255,255,255,0);
+  border-width: 4px;
+}
+%imgAutoCenter{
+  position: relative;
+  overflow: hidden;
+  img{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    z-index: 10;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+%cover100 {
+  background-size: 100% auto;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+%backface{
+  -webkit-backface-visibility:hidden; 
+  -moz-backface-visibility:hidden;
+  -ms-backface-visibility:hidden;
+}
+
+%fontello{
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+%parentTransform{
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform:translate3d(0,0,0);
+}
+
+%ellipsis{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+$white: #FFFFFF;
+
+%list-none{
+  list-style: none;
+}
+
+
+%flex-wrap{
+  @include flex-wrap(wrap);
+}
+%radius{
+  @include border-radius();
+}
+%photoOverflow{
+  line-height: 0;
+  overflow: hidden;
+  @extend %radius;
+  img{
+    will-change: transform;
+    width: 100%;
+    height: auto;
+  }
+}
+
+%muller{
+  font-family: 'Muller';
+}
+
+@mixin placeholder($color : #ccc ){
+  &::-webkit-input-placeholder{
+    color: $color;
+  }
+  &::-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder {
+    color: $color;
+  }
+}
+
+@mixin excerpt($font-size: $paragraph-font-size, $line-height: 1.4, $lines-to-show: 3, $height:'fixed') {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  @if($height == 'fixed'){
+    height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+  }@else{
+    height: auto;
+    max-height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+  }
+  font-size: $font-size;
+  line-height: $line-height;
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @-moz-document url-prefix() {
+    overflow: hidden;
+    position: relative;
+    &:before {
+      bottom: 0;
+      position: absolute;
+      right: 0;
+      float: right;
+      content: '\2026';
+      margin-left: -3rem;
+      width: 3rem;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      height: 50px;
+      width: 100%;
+      z-index: 1;
+    }
+  }
+}
+
+@mixin excerptMin($font-size: $paragraph-font-size, $line-height: 1.4, $lines-to-show: 3, $height:'fixed') {
+  @if($height == 'fixed'){
+    height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+  }@else{
+    height: auto;
+    max-height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+  }
+  font-size: $font-size;
+  line-height: $line-height;
+  -webkit-line-clamp: $lines-to-show;
+}
+@mixin excerptClear(){
+  -webkit-line-clamp:999;
+  overflow: visible;
+  height: auto;
+  min-height: 0;
+  max-height: 999%;
+  display: block !important;
+  @-moz-document url-prefix() {
+    overflow: visible;
+    &:after, &:before{
+      display: none !important;
+    }
+  }
+}
